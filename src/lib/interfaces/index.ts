@@ -36,3 +36,21 @@ export interface OrdersAddress {
   areaCode: string;
   phone: string;
 }
+
+export interface Product {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  stock: number;
+  type: string;
+  imageUrl: null;
+  isDeleted: boolean;
+  isActive: boolean;
+  isFeatured: boolean;
+  isOnSale: boolean;
+  discount: number;
+  createdAt: Date;
+  updatedAt: Date;
+  slug: string;
+}

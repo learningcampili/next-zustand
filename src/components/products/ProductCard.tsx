@@ -1,5 +1,5 @@
 "use client";
-import { CartProduct } from "@/store/cart--store";
+import { CartProduct } from "@/store/cart-store";
 //import Button from "./button/Button";
 import { BsQrCode } from "react-icons/bs";
 import Image from "next/image";
@@ -19,13 +19,13 @@ const ProductCard = ({ product }: { product: CartProduct }) => {
           <Image
             src={product.imageUrl}
             alt={product.name}
-            width={150}
-            height={150}
+            width={160}
+            height={160}
             style={{ objectFit: "cover" }}
             priority
           />
         )}
-        <h2 className="text-center text-lg font-bold mt-2">{product.name}</h2>
+        <h2 className="text-center text-md font-bold mt-2">{product.name}</h2>
         {/* <Button
         size="sm"
         title="Add to cart"

@@ -46,8 +46,8 @@ export const useCartStore = create<State>()(
         const subTotal = cart.reduce((subTotal, product) => {
           return product.quantity * product.price + subTotal;
         }, 0);
-        const tax = subTotal * 0.21;
-        const total = subTotal + tax;
+        //const tax = subTotal * 0.21;
+        const total = subTotal;
         //const total = subTotal + tax;
         const itemsInCart = cart.reduce(
           (total, item) => total + item.quantity,
@@ -56,7 +56,7 @@ export const useCartStore = create<State>()(
 
         return {
           subTotal,
-          tax,
+          //tax,
           total,
           itemsInCart,
         };

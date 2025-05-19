@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../button/Button";
 import { formatNumber } from "@/lib/utils";
-import { useCartStore } from "@/store/cart--store";
+import { useCartStore } from "@/store/cart-store";
 
 const SumaryCart = () => {
   const { getSummaryInformation } = useCartStore();

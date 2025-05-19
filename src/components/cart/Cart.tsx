@@ -6,7 +6,7 @@ import Button from "../button/Button";
 import Link from "next/link";
 import Image from "next/image";
 
-import { useCartStore } from "@/store/cart--store";
+import { useCartStore } from "@/store/cart-store";
 import { QuantitySelector } from "./QuantitySelector";
 import { elipsisString, formatNumber } from "@/lib/utils";
 import { BsQrCode } from "react-icons/bs";
