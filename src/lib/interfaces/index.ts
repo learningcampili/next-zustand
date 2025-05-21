@@ -1,11 +1,3 @@
-export interface Country {
-  id: string;
-  code: string;
-  name: string;
-  phoneCode: string;
-  active: string;
-}
-
 export interface Address {
   firstName: string;
   lastName: string;
@@ -53,4 +45,26 @@ export interface Product {
   createdAt: Date;
   updatedAt: Date;
   slug: string;
+}
+
+export interface BillingAddress {
+  firstName: string; // Prisma: @map("name")
+  lastName: string; // Prisma: @map("surname")
+  streetName: string; // Prisma: @map("street_name")
+  streetNumber: number; // Prisma: @map("street_number")
+  floor?: number;
+  apartment?: string;
+  postalCode: string; // Prisma: @map("zip_code")
+  cityName: string; // Prisma: @map("city_name")
+  countryId: string;
+  areaCode: string; // Prisma: @map("area_code")
+  phone: number;
+}
+
+export interface Country {
+  id: string;
+  code: string;
+  name: string;
+  phoneCode: string;
+  active: boolean;
 }

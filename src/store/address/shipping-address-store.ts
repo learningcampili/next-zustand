@@ -21,7 +21,7 @@ interface State {
   setAddress: (address: State["address"]) => void;
 }
 
-export const useAddressStore = create<State>()(
+export const useShippingAddressStore = create<State>()(
   persist(
     (set) => ({
       address: {
@@ -44,7 +44,7 @@ export const useAddressStore = create<State>()(
       },
     }),
     {
-      name: "billing-address",
+      name: "shipping-address",
     }
   )
 );

@@ -1,8 +1,10 @@
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001/api";
+import { Country } from "@/lib/interfaces";
 
-export const listCountries = async () => {
-  const response = await fetch(`${API_BASE_URL}/countries`);
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_BACK_URL || "http://localhost:3001/api";
+
+export const listCountries = async (): Promise<Country[]> => {
+  const response = await fetch(`${API_BASE_URL}/countries?active=true`);
   if (!response.ok) {
     throw new Error("Countries not found");
   }

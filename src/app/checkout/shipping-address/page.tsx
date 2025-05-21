@@ -1,7 +1,7 @@
 import { listCountries } from "@/actions/country-actions";
-import { BillingAddressForm } from "@/components/address/BillingForm";
+import { ShippingAddressForm } from "@/components/address/ShippingFrom";
 
-const BillingAddressPage = async () => {
+const ShippimgAddressPage = async () => {
   const countries = await listCountries();
 
   if (!countries) {
@@ -10,9 +10,9 @@ const BillingAddressPage = async () => {
 
   return (
     <div>
-      <BillingAddressForm countries={countries} />
+      <ShippingAddressForm countries={countries} />
     </div>
   );
 };
 
-export default BillingAddressPage;
+export default ShippimgAddressPage;

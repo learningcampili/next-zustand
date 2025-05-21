@@ -6,6 +6,7 @@ export interface CartProduct {
   slug: string;
   name: string;
   price: number;
+  type: string;
   discount?: number;
   isOnSale?: boolean;
   quantity: number;
@@ -19,7 +20,7 @@ interface State {
   clearCart: () => void;
   getSummaryInformation: () => {
     subTotal: number;
-    tax: number;
+    //tax: number;
     total: number;
     itemsInCart: number;
   };

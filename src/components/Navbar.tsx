@@ -21,6 +21,9 @@ const Navbar = () => {
 
   return (
     <nav className=" h-16 px-10 py-2 bg-gray-900">
+      <Link href="/" className="flex items-end">
+        Home
+      </Link>
       <ul className="flex items-center justify-end w-full gap-10">
         <li>{count}</li>
         <li>

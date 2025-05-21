@@ -11,7 +11,7 @@ const ProductCard = ({ product }: { product: CartProduct }) => {
   return (
     <div
       key={product.id}
-      className="flex flex-col items-center justify-center w-[300px] h-[300px] py-2 border-2 border-gray-500 rounded-lg"
+      className="flex flex-col items-center justify-center w-[300px] h-[300px] py-2 border-2 border-gray-500 rounded-lg shadow-lg shadow-gray-500/50"
     >
       <Link href={`/products/${product.slug}?origin=/`}>
         {!product.imageUrl && <BsQrCode size={150} />}
