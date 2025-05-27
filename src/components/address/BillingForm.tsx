@@ -9,6 +9,7 @@ import Button from "../button/Button";
 import { useAddressStore } from "@/store/address/address-store";
 import { useCartStore } from "@/store/cart-store";
 import { useRouter } from "next/navigation";
+import { capitalizeFirstLetterOfEachWord } from "@/lib/utils";
 
 interface Props {
   countries: Country[];
@@ -73,7 +74,17 @@ export const BillingAddressForm = ({ countries }: Props) => {
       (product) => product.type === "PHYSICAL"
     );
 
-    setAddress(data);
+    setAddress({
+      ...data,
+      firstName: capitalizeFirstLetterOfEachWord(data.firstName),
+      lastName: capitalizeFirstLetterOfEachWord(data.lastName),
+      streetName: capitalizeFirstLetterOfEachWord(data.streetName),
+      cityName: capitalizeFirstLetterOfEachWord(data.cityName),
+      countryName: capitalizeFirstLetterOfEachWord(data.countryName),
+      apartment: data.apartment
+        ? capitalizeFirstLetterOfEachWord(data.apartment)
+        : "",
+    });
     setIsSubmitting(true);
     setSubmitSuccess(null);
     setSubmitMessage("");

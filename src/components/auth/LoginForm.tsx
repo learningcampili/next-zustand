@@ -11,14 +11,15 @@ import Button from "../button/Button";
 
 import { loginSchema, LoginType } from "@/lib/zod";
 import { useRouter } from "next/navigation";
-import { useUser } from "@/context/UserContext";
+
 import { loginAction } from "@/actions/auth/login-actions";
+import { useUserStore } from "@/store/user/user-store";
 
 export const LoginForm = ({ returnUrl }: { returnUrl: string }) => {
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
-  const { refreshUser } = useUser();
+  const setUser = useUserStore((state) => state.setUser);
 
   const form = useForm<LoginType>({
     resolver: zodResolver(loginSchema),
@@ -32,23 +33,28 @@ export const LoginForm = ({ returnUrl }: { returnUrl: string }) => {
     setError(null);
 
     startTransition(async () => {
-      const data = await loginAction(values);
+      const result = await loginAction(values);
 
-      console.log(data);
-
-      if (data?.error) {
-        setError(data.error || "An unexpected error occurred.");
+      if (result?.error) {
+        setError(result.error || "An unexpected error occurred.");
+        return;
       }
-      if (data?.success) {
-        localStorage.setItem(
-          "user",
-          data.data.firstName + " " + data.data.lastName
-        );
-        localStorage.setItem("id", data.data.id);
-        await refreshUser(); // si usás contexto (opcional)
-        router.refresh(); // 🔁 refresca layout/server components/navbar
+
+      if (result?.success && result.data?.user) {
+        const user = {
+          id: result.data.user.id,
+          role: result.data.user.role,
+          email: result.data.user.email,
+          firstName: result.data.user.firstName,
+          lastName: result.data.user.lastName,
+        };
+
+        setUser(user); // ✅ Guardamos el usuario en Zustand (y sessionStorage si activaste persist)
+
+        router.refresh();
         router.push(returnUrl);
       }
+
       form.reset();
     });
   }

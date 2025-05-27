@@ -9,6 +9,7 @@ import Button from "../button/Button";
 
 import { useShippingAddressStore } from "@/store/address/shipping-address-store";
 import { useRouter } from "next/navigation";
+import { capitalizeFirstLetterOfEachWord } from "@/lib/utils";
 
 interface Props {
   countries: Country[];
@@ -20,6 +21,8 @@ export const ShippingAddressForm = ({ countries }: Props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState<boolean | null>(null);
   const [submitMessage, setSubmitMessage] = useState("");
+
+  const address = useShippingAddressStore((state) => state.address);
 
   const setAddress = useShippingAddressStore((state) => state.setAddress);
 
@@ -35,22 +38,24 @@ export const ShippingAddressForm = ({ countries }: Props) => {
   } = useForm<ShippingAddressFormValues>({
     resolver: zodResolver(shippingAddressSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      streetName: "",
-      streetNumber: "",
-      floor: "",
-      apartment: "",
-      postalCode: "",
-      cityName: "",
-      countryId: "",
-      countryName: "",
-      phone: "",
-      areaCode: "",
+      firstName: address.firstName || "",
+      lastName: address.lastName || "",
+      streetName: address.streetName || "",
+      streetNumber: address.streetNumber || "",
+      floor: address.floor || "",
+      apartment: address.apartment || "",
+      postalCode: address.postalCode || "",
+      cityName: address.cityName || "",
+      countryId: address.countryId || "",
+      countryName: address.countryName || "",
+      areaCode: address.areaCode || "",
+      phone: address.phone || "",
     },
   });
 
   const selectedCountryId = watch("countryId");
+
+  useEffect(() => {}, []);
 
   useEffect(() => {
     const selectedCountry = countries.find(
@@ -67,7 +72,17 @@ export const ShippingAddressForm = ({ countries }: Props) => {
 
   // Función para manejar el envío del formulario
   const onSubmit = async (data: ShippingAddressFormValues) => {
-    setAddress(data);
+    setAddress({
+      ...data,
+      firstName: capitalizeFirstLetterOfEachWord(data.firstName),
+      lastName: capitalizeFirstLetterOfEachWord(data.lastName),
+      streetName: capitalizeFirstLetterOfEachWord(data.streetName),
+      cityName: capitalizeFirstLetterOfEachWord(data.cityName),
+      countryName: capitalizeFirstLetterOfEachWord(data.countryName),
+      apartment: data.apartment
+        ? capitalizeFirstLetterOfEachWord(data.apartment)
+        : "",
+    });
     setIsSubmitting(true);
     setSubmitSuccess(null);
     setSubmitMessage("");

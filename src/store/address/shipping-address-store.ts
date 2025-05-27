@@ -12,13 +12,14 @@ interface State {
     postalCode: string;
     cityName: string;
     countryId: string;
-    countryName: string;
+    countryName?: string;
     areaCode: string;
     phone: string;
   };
 
   // Methods
   setAddress: (address: State["address"]) => void;
+  clearAddress: () => void;
 }
 
 export const useShippingAddressStore = create<State>()(
@@ -41,6 +42,9 @@ export const useShippingAddressStore = create<State>()(
 
       setAddress: (address) => {
         set({ address });
+      },
+      clearAddress: () => {
+        set({ address: {} as State["address"] });
       },
     }),
     {

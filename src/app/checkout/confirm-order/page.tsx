@@ -27,12 +27,12 @@ const CartPage = () => {
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-20 mt-5">
+            <div className="grid grid-cols-1 md:grid-cols-6 gap-20 mt-5">
               <div className="md:col-span-3 space-y-8 ">
                 <BillingAddressCard />
                 <ShippingAddressCard />
               </div>
-              <div className="md:col-span-2 ">
+              <div className="md:col-span-3 ">
                 <SumaryOrder />
               </div>
             </div>

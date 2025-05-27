@@ -11,6 +11,8 @@ export const getCookie = async (name: string) => {
   return data?.value;
 };
 
+// helpers.ts
+
 export const convertToDDMMYYYY = async (
   isoDateString: string
 ): Promise<string> => {

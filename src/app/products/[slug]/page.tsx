@@ -17,7 +17,7 @@ const ProductDetailPage = async ({
 
   const slug = (await params).slug;
   const product = await getProductBySlug(slug);
-  console.log(JSON.stringify(product, null, 2));
+
   return (
     <div className="container mx-auto grid md:grid-cols-2 gap-8 items-center justify-center">
       {/* Product Image */}

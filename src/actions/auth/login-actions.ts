@@ -1,3 +1,4 @@
+import { getCookie } from "@/lib/helpers";
 import { LoginType } from "@/lib/zod";
 
 const BACK_URL = process.env.NEXT_PUBLIC_BACK_URL;
@@ -9,7 +10,7 @@ export const loginAction = async (value: LoginType) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(value),
-    // credentials: "include",
+    credentials: "include",
   });
 
   const data = await response.json();
@@ -24,4 +25,19 @@ export const loginAction = async (value: LoginType) => {
     success: true,
     data,
   };
+};
+
+export const logoutAction = async () => {
+  const BACK_URL = process.env.NEXT_PUBLIC_BACK_URL;
+
+  const token = await getCookie("accessToken");
+
+  await fetch(`${BACK_URL}/auth/logout`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: `accessToken=${token}`,
+    },
+    credentials: "include",
+  });
 };
